@@ -1,0 +1,20 @@
+Les triggers PostgreSQL sont des fonctions de rappel (callback functions) de base de données, qui sont automatiquement exécutées / appelées lorsqu'un événement de base de données spécifié se produit.
+
+
+# Exemple
+
+Nous souhaitons mettre en place le système d’information nécessaire à un restaurant. 
+Un extrait de la base de données associée est présenté ci-dessous : 
+
+ Categorie (Id_Categorie[pk], Nom) 
+ Plat (Id_Plat[pk], Nom, Supplement, #Id_Categorie) 
+ Menu (Id_Menu[pk], Prix, NbServices, BoissonsComprises, Validité) 
+ CompositionMenu (#Id_Menu[pk], #Id_plat[pk]) 
+ Client (Id_Client[pk], Nom, Adresse) 
+ Commande (Id_Comm[pk], date_Comm, total, #Id_Client) 
+ CompositionCommande (#Id_Comm[pk], #Id_Menu[pk], #Id_Plat[pk]) 
+
+ Q1. Nous souhaitons créer un trigger levant une exception lorsque la composition des plats dans un menu dépasse le nombre de services spécifié dans le Menu.
+
+ fonction trigger
+ trigger
